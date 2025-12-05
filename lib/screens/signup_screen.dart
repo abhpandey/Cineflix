@@ -1,6 +1,5 @@
-
 import 'package:flutter/material.dart';
-import 'login_screen.dart'; 
+import 'login_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -53,76 +52,80 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Color(0xFFB30000),
-              Color(0xFF7A0000),
-              Color(0xFF2B0000),
-            ],
+      body: Stack(
+        children: [
+          // Background
+          Container(
+            width: double.infinity,
+            height: double.infinity,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color(0xFFB30000),
+                  Color(0xFF7A0000),
+                  Color(0xFF2B0000),
+                ],
+              ),
+            ),
           ),
-        ),
-        child: SafeArea(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 25),
 
-                // Title
-                const Center(
-                  child: Text(
-                    "Sign Up",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 1,
+          SafeArea(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 60),
+
+                  const Center(
+                    child: Text(
+                      "Sign Up",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 1,
+                      ),
                     ),
                   ),
-                ),
 
-                const SizedBox(height: 35),
+                  const SizedBox(height: 30),
 
-                _label("Name"),
-                TextField(
-                  controller: _nameCtrl,
-                  decoration: _decoration(),
-                ),
+                  _label("Name"),
+                  TextField(
+                    controller: _nameCtrl,
+                    decoration: _decoration(),
+                  ),
 
-                const SizedBox(height: 18),
+                  const SizedBox(height: 18),
 
-                _label("Email"),
-                TextField(
-                  controller: _emailCtrl,
-                  decoration: _decoration(),
-                ),
+                  _label("Email"),
+                  TextField(
+                    controller: _emailCtrl,
+                    decoration: _decoration(),
+                  ),
 
-                const SizedBox(height: 18),
+                  const SizedBox(height: 18),
 
-                _label("Create a Password"),
-                TextField(
-                  controller: _passCtrl,
-                  obscureText: true,
-                  decoration: _decoration(),
-                ),
+                  _label("Create a Password"),
+                  TextField(
+                    controller: _passCtrl,
+                    obscureText: true,
+                    decoration: _decoration(),
+                  ),
 
-                const SizedBox(height: 18),
+                  const SizedBox(height: 18),
 
-                _label("Confirm Password"),
-                TextField(
-                  controller: _confirmCtrl,
-                  obscureText: true,
-                  decoration: _decoration(),
-                ),
+                  _label("Confirm Password"),
+                  TextField(
+                    controller: _confirmCtrl,
+                    obscureText: true,
+                    decoration: _decoration(),
+                  ),
 
-                const SizedBox(height: 40),
+                  const SizedBox(height: 40),
 
                   SizedBox(
                     width: double.infinity,
@@ -151,31 +154,47 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
 
+                  const SizedBox(height: 14),
 
-                const SizedBox(height: 14),
-
-                Center(
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (_) => const LoginScreen()),
-                      );
-                    },
-                    child: const Text(
-                      "Already have an account? Login here",
-                      style: TextStyle(
-                        color: Colors.blueAccent,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
+                  Center(
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (_) => const LoginScreen()),
+                        );
+                      },
+                      child: const Text(
+                        "Already have an account? Login here",
+                        style: TextStyle(
+                          color: Colors.blueAccent,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+
+                  const SizedBox(height: 120),
+                ],
+              ),
             ),
           ),
-        ),
+
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 70,
+            child: Center(
+              child: Image.asset(
+                "assets/icons/cineflixlogo.PNG",
+                width: 120,
+                height: 120,
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

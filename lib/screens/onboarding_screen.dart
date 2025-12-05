@@ -127,7 +127,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                               color: Colors.white70,
-                              fontSize: 13.5,
+                              fontSize: 20,
                               height: 1.5,
                             ),
                           ),
@@ -179,7 +179,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
-                        fontSize: 15.5,
+                        fontSize: 16,
                       ),
                     ),
                   ),

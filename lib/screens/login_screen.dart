@@ -69,14 +69,14 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 25),
+                const SizedBox(height: 150),
 
                 const Center(
                   child: Text(
                     "Log In",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 16,
+                      fontSize: 30,
                       fontWeight: FontWeight.w700,
                       letterSpacing: 1,
                     ),
@@ -143,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       "Don't have an account? Sign up here",
                       style: TextStyle(
                         color: Colors.blueAccent,
-                        fontSize: 11,
+                        fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -152,7 +152,9 @@ class _LoginScreenState extends State<LoginScreen> {
               ],
             ),
           ),
+        
         ),
+        
       ),
     );
   }

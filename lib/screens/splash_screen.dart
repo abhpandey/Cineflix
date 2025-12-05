@@ -64,7 +64,7 @@ class _SplashScreenState extends State<SplashScreen>
               ),
               const SizedBox(height: 18),
               const Text(
-                "CINE FLIX",
+                "CINEFLIX",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
