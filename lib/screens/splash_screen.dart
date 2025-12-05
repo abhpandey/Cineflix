@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller.forward();
 
-    Timer(const Duration(seconds: 2), () {
+    Timer(const Duration(seconds: 4), () {
       if (!mounted) return;
       Navigator.pushReplacement(
         context,

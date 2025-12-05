@@ -72,125 +72,133 @@ class _SignupScreenState extends State<SignupScreen> {
           ),
 
           SafeArea(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 60),
-
-                  const Center(
-                    child: Text(
-                      "Sign Up",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 1,
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 30),
-
-                  _label("Name"),
-                  TextField(
-                    controller: _nameCtrl,
-                    decoration: _decoration(),
-                  ),
-
-                  const SizedBox(height: 18),
-
-                  _label("Email"),
-                  TextField(
-                    controller: _emailCtrl,
-                    decoration: _decoration(),
-                  ),
-
-                  const SizedBox(height: 18),
-
-                  _label("Create a Password"),
-                  TextField(
-                    controller: _passCtrl,
-                    obscureText: true,
-                    decoration: _decoration(),
-                  ),
-
-                  const SizedBox(height: 18),
-
-                  _label("Confirm Password"),
-                  TextField(
-                    controller: _confirmCtrl,
-                    obscureText: true,
-                    decoration: _decoration(),
-                  ),
-
-                  const SizedBox(height: 40),
-
-                  SizedBox(
-                    width: double.infinity,
-                    height: 46,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFE10000),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (_) => const LoginScreen()),
-                        );
-                      },
-                      child: const Text(
-                        "Sign Up",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 14),
-
-                  Center(
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (_) => const LoginScreen()),
-                        );
-                      },
-                      child: const Text(
-                        "Already have an account? Login here",
-                        style: TextStyle(
-                          color: Colors.blueAccent,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 120),
-                ],
-              ),
-            ),
-          ),
-
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 70,
             child: Center(
-              child: Image.asset(
-                "assets/icons/cineflixlogo.PNG",
-                width: 120,
-                height: 120,
-                fit: BoxFit.contain,
+              child: SingleChildScrollView(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 26, vertical: 24),
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: 430, // ✅ stops stretching on tablets
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 60),
+
+                      const Center(
+                        child: Text(
+                          "Sign Up",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 1,
+                          ),
+                        ),
+                      ),
+
+                      const SizedBox(height: 30),
+
+                      _label("Name"),
+                      SizedBox(
+                        height: 48, // ✅ fixed field height
+                        child: TextField(
+                          controller: _nameCtrl,
+                          decoration: _decoration(),
+                        ),
+                      ),
+
+                      const SizedBox(height: 18),
+
+                      _label("Email"),
+                      SizedBox(
+                        height: 48, // ✅ fixed field height
+                        child: TextField(
+                          controller: _emailCtrl,
+                          decoration: _decoration(),
+                        ),
+                      ),
+
+                      const SizedBox(height: 18),
+
+                      _label("Create a Password"),
+                      SizedBox(
+                        height: 48, // ✅ fixed field height
+                        child: TextField(
+                          controller: _passCtrl,
+                          obscureText: true,
+                          decoration: _decoration(),
+                        ),
+                      ),
+
+                      const SizedBox(height: 18),
+
+                      _label("Confirm Password"),
+                      SizedBox(
+                        height: 48, // ✅ fixed field height
+                        child: TextField(
+                          controller: _confirmCtrl,
+                          obscureText: true,
+                          decoration: _decoration(),
+                        ),
+                      ),
+
+                      const SizedBox(height: 40),
+
+                      SizedBox(
+                        width: double.infinity,
+                        height: 46, // ✅ fixed button height
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFFE10000),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => const LoginScreen()),
+                            );
+                          },
+                          child: const Text(
+                            "Sign Up",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      const SizedBox(height: 14),
+
+                      Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => const LoginScreen()),
+                            );
+                          },
+                          child: const Text(
+                            "Already have an account? Login here",
+                            style: TextStyle(
+                              color: Colors.blueAccent,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      const SizedBox(height: 120),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),

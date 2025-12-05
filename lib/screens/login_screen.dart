@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'signup_screen.dart';
-import 'home_screen.dart'; 
+import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -64,97 +64,108 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
         child: SafeArea(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 150),
-
-                const Center(
-                  child: Text(
-                    "Log In",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 1,
-                    ),
-                  ),
+          child: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 24),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(
+                  maxWidth: 430, // ✅ stops stretching on tablets
                 ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 150),
 
-                const SizedBox(height: 35),
-
-                _label("Email"),
-                TextField(
-                  controller: _emailCtrl,
-                  decoration: _decoration(),
-                ),
-
-                const SizedBox(height: 18),
-
-                _label("Password"),
-                TextField(
-                  controller: _passCtrl,
-                  obscureText: true,
-                  decoration: _decoration(),
-                ),
-
-                const SizedBox(height: 40),
-
-                SizedBox(
-                  width: double.infinity,
-                  height: 46,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFE10000),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                    const Center(
+                      child: Text(
+                        "Log In",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 30,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 1,
+                        ),
                       ),
                     ),
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (_) => const HomeScreen()),
-                      );
-                    },
-                    child: const Text(
-                      "Log In",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+
+                    const SizedBox(height: 35),
+
+                    _label("Email"),
+                    SizedBox(
+                      height: 48, // ✅ fixed field height
+                      child: TextField(
+                        controller: _emailCtrl,
+                        decoration: _decoration(),
                       ),
                     ),
-                  ),
-                ),
 
-                const SizedBox(height: 14),
+                    const SizedBox(height: 18),
 
-                Center(
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (_) => const SignupScreen()),
-                      );
-                    },
-                    child: const Text(
-                      "Don't have an account? Sign up here",
-                      style: TextStyle(
-                        color: Colors.blueAccent,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                    _label("Password"),
+                    SizedBox(
+                      height: 48, // ✅ fixed field height
+                      child: TextField(
+                        controller: _passCtrl,
+                        obscureText: true,
+                        decoration: _decoration(),
                       ),
                     ),
-                  ),
+
+                    const SizedBox(height: 40),
+
+                    SizedBox(
+                      width: double.infinity,
+                      height: 46, // ✅ fixed button height
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFE10000),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (_) => const HomeScreen()),
+                          );
+                        },
+                        child: const Text(
+                          "Log In",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 14),
+
+                    Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (_) => const SignupScreen()),
+                          );
+                        },
+                        child: const Text(
+                          "Don't have an account? Sign up here",
+                          style: TextStyle(
+                            color: Colors.blueAccent,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
-        
         ),
-        
       ),
     );
   }
