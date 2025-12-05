@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:ceniflix/screens/onboarding_screen.dart';
 import 'package:ceniflix/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen>
       if (!mounted) return;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const SignupScreen()),
+        MaterialPageRoute(builder: (_) => const OnboardingScreen()),
       );
     });
   }
