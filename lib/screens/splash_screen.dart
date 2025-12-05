@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:ceniflix/screens/onboarding_screen.dart';
-import 'package:ceniflix/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 
 
