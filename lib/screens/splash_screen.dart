@@ -20,7 +20,6 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
 
-    // Simple fade-in animation
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 900),
@@ -33,7 +32,6 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller.forward();
 
-    // Go to Home after delay
     Timer(const Duration(seconds: 2), () {
       if (!mounted) return;
       Navigator.pushReplacement(
