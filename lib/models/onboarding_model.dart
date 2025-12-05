@@ -12,7 +12,6 @@ class OnboardingModel {
   });
 }
 
-// Your onboarding pages list
 const List<OnboardingModel> onboardingPages = [
   OnboardingModel(
     title: "Welcome to CineFlix",
