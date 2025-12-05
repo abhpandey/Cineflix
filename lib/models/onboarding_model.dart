@@ -16,17 +16,17 @@ class OnboardingModel {
 const List<OnboardingModel> onboardingPages = [
   OnboardingModel(
     title: "Welcome to CineFlix",
-    subtitle: "Stream your favorite movies and series anytime.",
+    subtitle: "View what your local cinema is showing.",
     icon: Icons.movie_filter_rounded,
   ),
   OnboardingModel(
-    title: "Discover New Content",
-    subtitle: "Find trending, top-rated, and recommended shows.",
+    title: "Book the latest Movies",
+    subtitle: "Book tickets for the latest movies in just a few taps.",
     icon: Icons.local_fire_department_rounded,
   ),
   OnboardingModel(
-    title: "Watch Anywhere",
-    subtitle: "Enjoy on your phone, tablet, or big screen.",
+    title: "",
+    subtitle: " Enjoy seamless booking on the go! hussle-free and convenient.",
     icon: Icons.phone_iphone_rounded,
   ),
 ];

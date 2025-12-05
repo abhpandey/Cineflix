@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ceniflix/models/onboarding_model.dart';
-import 'signup_screen.dart'; // ✅ go to signup after onboarding
+import 'signup_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -55,7 +55,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: SafeArea(
           child: Column(
             children: [
-              // Skip button
+              // Skip Button
               Align(
                 alignment: Alignment.topRight,
                 child: TextButton(
@@ -67,7 +67,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
 
-              // Pages
               Expanded(
                 child: PageView.builder(
                   controller: _controller,
@@ -75,11 +74,25 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   onPageChanged: (i) => setState(() => _index = i),
                   itemBuilder: (context, i) {
                     final page = onboardingPages[i];
+
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 26),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          const SizedBox(height: 10),
+
+                          Align(
+                            alignment: Alignment.center,
+                            child: Image.asset(
+                              "assets/icons/cineflixlogo.PNG",
+                              width: 170,
+                              height: 170,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+
+                          const Spacer(),
+
                           Container(
                             height: 140,
                             width: 140,
@@ -118,6 +131,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               height: 1.5,
                             ),
                           ),
+
+                          const Spacer(),
                         ],
                       ),
                     );
@@ -125,7 +140,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
 
-              // Dots indicator
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
@@ -145,7 +159,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
               const SizedBox(height: 20),
 
-              // Next / Get Started button
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 26),
                 child: SizedBox(
