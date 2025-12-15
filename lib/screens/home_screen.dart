@@ -9,8 +9,24 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: const Color.fromARGB(255, 207, 38, 38),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 235, 89, 89),
-        title: const Text("Home Page"),
-        centerTitle: true,
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              'assets/icons/cineflixlogo.PNG',
+              height: 30,
+              fit: BoxFit.contain,
+            ),
+            const SizedBox(width: 8),
+            const Text(
+              "Cineflix",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
       body: const Center(
         child: Text(
@@ -21,7 +37,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0,
         items: const [
