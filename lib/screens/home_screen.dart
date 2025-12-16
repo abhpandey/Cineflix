@@ -49,8 +49,8 @@ class HomeScreen extends StatelessWidget {
             label: 'Movies',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.more_horiz),
-            label: 'More',
+            icon: Icon(Icons.man_rounded),
+            label: 'profile',
           ),
         ],
       ),

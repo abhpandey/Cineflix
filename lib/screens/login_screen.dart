@@ -69,12 +69,12 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 24),
               child: ConstrainedBox(
                 constraints: const BoxConstraints(
-                  maxWidth: 430, // ✅ stops stretching on tablets
+                  maxWidth: 400, 
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 150),
+                    const SizedBox(height: 50),
 
                     const Center(
                       child: Text(
@@ -92,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     _label("Email"),
                     SizedBox(
-                      height: 48, // ✅ fixed field height
+                      height: 48, 
                       child: TextField(
                         controller: _emailCtrl,
                         decoration: _decoration(),
@@ -103,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     _label("Password"),
                     SizedBox(
-                      height: 48, // ✅ fixed field height
+                      height: 48, 
                       child: TextField(
                         controller: _passCtrl,
                         obscureText: true,
@@ -115,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     SizedBox(
                       width: double.infinity,
-                      height: 46, // ✅ fixed button height
+                      height: 46, 
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFFE10000),
