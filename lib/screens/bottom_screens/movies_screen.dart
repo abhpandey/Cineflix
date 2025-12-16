@@ -13,9 +13,8 @@ class _MoviesScreenState extends State<MoviesScreen> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 207, 38, 38),
       appBar: AppBar(
+        
         backgroundColor: const Color.fromARGB(255, 235, 89, 89),
-        title: const Text("Movies"),
-        centerTitle: true,
       ),
       body: const Center(
         child: Text(
