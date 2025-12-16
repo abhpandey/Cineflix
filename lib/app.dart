@@ -1,5 +1,6 @@
 import 'package:ceniflix/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:ceniflix/themes/themes_data.dart';
 
 
 class App extends StatelessWidget {
@@ -9,6 +10,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: getApplicationTheme(),
       home: SplashScreen(),
      );
   }
