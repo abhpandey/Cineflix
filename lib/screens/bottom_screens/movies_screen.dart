@@ -10,6 +10,23 @@ class MoviesScreen extends StatefulWidget {
 class _MoviesScreenState extends State<MoviesScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 207, 38, 38),
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 235, 89, 89),
+        title: const Text("Movies"),
+        centerTitle: true,
+      ),
+      body: const Center(
+        child: Text(
+          "Movies Screen",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
   }
 }
