@@ -69,16 +69,49 @@ class _HomeScreenState extends State<HomeScreen> {
 class HomePageBody extends StatelessWidget {
   const HomePageBody({super.key});
 
+  Widget _searchBar() {
+    return Container(
+      height: 48,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: const Color.fromARGB(255, 244, 245, 247),
+          width: 2,
+        ),
+        color: Colors.transparent,
+      ),
+      child: const TextField(
+        style: TextStyle(color: Colors.white),
+        decoration: InputDecoration(
+          hintText: "Search",
+          hintStyle: TextStyle(color: Colors.white70),
+          prefixIcon: Icon(Icons.search, color: Colors.white),
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.symmetric(vertical: 12),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        "Home Page",
-        style: TextStyle(
-          fontSize: 22,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        children: [
+          _searchBar(),
+          const SizedBox(height: 20),
+          const Center(
+            child: Text(
+              "Home Page",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -55,7 +55,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: SafeArea(
           child: Column(
             children: [
-              // Skip Button
               Align(
                 alignment: Alignment.topRight,
                 child: TextButton(

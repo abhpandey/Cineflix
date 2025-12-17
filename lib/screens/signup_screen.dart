@@ -54,7 +54,6 @@ class _SignupScreenState extends State<SignupScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // Background
           Container(
             width: double.infinity,
             height: double.infinity,
@@ -78,7 +77,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     const EdgeInsets.symmetric(horizontal: 26, vertical: 24),
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(
-                    maxWidth: 430, // ✅ stops stretching on tablets
+                    maxWidth: 430, 
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,7 +100,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
                       _label("Name"),
                       SizedBox(
-                        height: 48, // ✅ fixed field height
+                        height: 48, 
                         child: TextField(
                           controller: _nameCtrl,
                           decoration: _decoration(),
@@ -112,7 +111,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
                       _label("Email"),
                       SizedBox(
-                        height: 48, // ✅ fixed field height
+                        height: 48, 
                         child: TextField(
                           controller: _emailCtrl,
                           decoration: _decoration(),
@@ -123,7 +122,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
                       _label("Create a Password"),
                       SizedBox(
-                        height: 48, // ✅ fixed field height
+                        height: 48, 
                         child: TextField(
                           controller: _passCtrl,
                           obscureText: true,
@@ -135,7 +134,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
                       _label("Confirm Password"),
                       SizedBox(
-                        height: 48, // ✅ fixed field height
+                        height: 48, 
                         child: TextField(
                           controller: _confirmCtrl,
                           obscureText: true,
@@ -147,7 +146,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
                       SizedBox(
                         width: double.infinity,
-                        height: 46, // ✅ fixed button height
+                        height: 46, 
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFFE10000),
