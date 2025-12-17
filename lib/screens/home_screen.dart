@@ -48,18 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
         currentIndex: _currentIndex,
         onTap: (index) => setState(() => _currentIndex = index),
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.movie),
-            label: 'Movies',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.man_rounded),
-            label: 'Profile',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.movie), label: 'Movies'),
+          BottomNavigationBarItem(icon: Icon(Icons.man_rounded), label: 'Profile'),
         ],
       ),
     );
@@ -93,22 +84,56 @@ class HomePageBody extends StatelessWidget {
     );
   }
 
+  Widget _moviePoster(String assetPath) {
+    return Container(
+      width: 120,
+      margin: const EdgeInsets.only(right: 12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        image: DecorationImage(
+          image: AssetImage(assetPath),
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final posters = [
+      'assets/images/avatar.jpg',
+      'assets/images/godzilla.jpeg',
+      'assets/images/avengers.jpg',
+      'assets/images/doomsday.png'
+    ];
+
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _searchBar(),
-          const SizedBox(height: 20),
-          const Center(
-            child: Text(
-              "Home Page",
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+          const SizedBox(height: 18),
+
+          const Text(
+            "Now Showing",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+
+          const SizedBox(height: 10),
+
+          SizedBox(
+            height: 170,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: posters.length,
+              itemBuilder: (context, index) {
+                return _moviePoster(posters[index]);
+              },
             ),
           ),
         ],
