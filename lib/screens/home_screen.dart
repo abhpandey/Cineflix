@@ -98,16 +98,76 @@ class HomePageBody extends StatelessWidget {
     );
   }
 
+  Widget _recommendedCard({
+    required String poster,
+    required String title,
+    required String subtitle,
+  }) {
+    return SizedBox(
+      width: 110,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 140,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              image: DecorationImage(
+                image: AssetImage(poster),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            subtitle,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 10,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final posters = [
       'assets/images/avatar.jpg',
       'assets/images/godzilla.jpeg',
       'assets/images/avengers.jpg',
-      'assets/images/doomsday.png'
+      'assets/images/doomsday.png',
     ];
 
-    return Padding(
+    final recommended = [
+      {
+        "poster": "assets/images/avatar.jpg",
+        "title": "Avatar",
+        "subtitle": "Sci-Fi • Adventure",
+      },
+      {
+        "poster": "assets/images/doomsday.png",
+        "title": "Doomsday",
+        "subtitle": "Action • Thriller",
+      },
+    ];
+
+    return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,7 +183,6 @@ class HomePageBody extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-
           const SizedBox(height: 10),
 
           SizedBox(
@@ -133,6 +192,51 @@ class HomePageBody extends StatelessWidget {
               itemCount: posters.length,
               itemBuilder: (context, index) {
                 return _moviePoster(posters[index]);
+              },
+            ),
+          ),
+
+          const SizedBox(height: 22),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                "Recommended",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: const Text(
+                  "See All >",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 6),
+
+          SizedBox(
+            height: 200,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: recommended.length,
+              separatorBuilder: (_, __) => const SizedBox(width: 12),
+              itemBuilder: (context, i) {
+                final m = recommended[i];
+                return _recommendedCard(
+                  poster: m["poster"]!,
+                  title: m["title"]!,
+                  subtitle: m["subtitle"]!,
+                );
               },
             ),
           ),
