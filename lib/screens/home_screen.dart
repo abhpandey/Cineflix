@@ -154,7 +154,7 @@ class HomePageBody extends StatelessWidget {
       'assets/images/doomsday.png',
     ];
 
-    final recommended = [
+    final popular = [
       {
         "poster": "assets/images/avatar.jpg",
         "title": "Avatar",
@@ -162,8 +162,26 @@ class HomePageBody extends StatelessWidget {
       },
       {
         "poster": "assets/images/doomsday.png",
-        "title": "Doomsday",
-        "subtitle": "Action • Thriller",
+        "title": "Avengers: Doomsday",
+        "subtitle": "Action • Adventure",
+      },
+    ];
+
+    final comingSoon = [
+      {
+        "poster": "assets/images/underground.jpg",
+        "title": "6Underground",
+        "subtitle": "Coming Soon",
+      },
+      {
+        "poster": "assets/images/zombieland.jpeg",
+        "title": "ZombieLand",
+        "subtitle": "Coming Soon",
+      },
+      {
+        "poster": "assets/images/anaconda.jpg",
+        "title": "Anaconda",
+        "subtitle": "Coming Soon",
       },
     ];
 
@@ -198,11 +216,12 @@ class HomePageBody extends StatelessWidget {
 
           const SizedBox(height: 22),
 
+          // ✅ Popular section (your existing recommended list)
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                "Recommended",
+                "Popular",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16,
@@ -221,17 +240,60 @@ class HomePageBody extends StatelessWidget {
               ),
             ],
           ),
-
           const SizedBox(height: 6),
 
           SizedBox(
             height: 200,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              itemCount: recommended.length,
+              itemCount: popular.length,
               separatorBuilder: (_, __) => const SizedBox(width: 12),
               itemBuilder: (context, i) {
-                final m = recommended[i];
+                final m = popular[i];
+                return _recommendedCard(
+                  poster: m["poster"]!,
+                  title: m["title"]!,
+                  subtitle: m["subtitle"]!,
+                );
+              },
+            ),
+          ),
+
+          const SizedBox(height: 22),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                "Coming Soon",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: const Text(
+                  "See All >",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+
+          SizedBox(
+            height: 200,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: comingSoon.length,
+              separatorBuilder: (_, __) => const SizedBox(width: 12),
+              itemBuilder: (context, i) {
+                final m = comingSoon[i];
                 return _recommendedCard(
                   poster: m["poster"]!,
                   title: m["title"]!,
