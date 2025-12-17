@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 207, 38, 38),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 235, 89, 89),
+        backgroundColor: const Color.fromARGB(255, 164, 59, 59),
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
