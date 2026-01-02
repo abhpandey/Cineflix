@@ -1,0 +1,60 @@
+import 'package:ceniflix/features/auth/domain/entities/auth_entity.dart';
+import 'package:hive/hive.dart';
+import 'package:ceniflix/core/constants/hive_table_constant.dart';
+import 'package:uuid/uuid.dart';
+
+part 'auth_hive_model.g.dart';
+
+@HiveType(typeId: HiveTableConstant.authTypeID)
+class AuthHiveModel extends HiveObject {
+  @HiveField(0)
+  final String? authId;
+
+  @HiveField(1)
+  final String fullName;
+
+  @HiveField(2)
+  final String username;
+
+  @HiveField(3)
+  final String email;
+
+  @HiveField(4)
+  final String? password;
+
+  @HiveField(5)
+  final String? profilePicture;
+
+  AuthHiveModel({
+    String? authId,
+    required this.fullName,
+    required this.username,
+    required this.email,
+    this.password,
+    this.profilePicture,
+  }) : authId = authId ?? const Uuid().v4();
+
+  // ✅ change: take AuthEntity, not AuthHiveModel
+  factory AuthHiveModel.fromEntity(AuthEntity entity) {
+    return AuthHiveModel(
+      authId: entity.authId, // ✅ map userId -> authId
+      fullName: entity.fullName,
+      username: entity.username,
+      email: entity.email,
+      password: entity.password,
+      profilePicture: entity.profilePicture,
+    );
+  }
+
+  // ✅ change: AuthEntity expects userId (not authId)
+  AuthEntity toEntity() {
+    return AuthEntity(
+      authId: authId, // ✅ map authId -> userId
+      fullName: fullName,
+      username: username,
+      email: email,
+      password: password,
+      profilePicture: profilePicture,
+    );
+  }
+}
