@@ -193,6 +193,15 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                                     _showSnack("Please fill all fields");
                                     return;
                                   }
+                                  if (!email.toLowerCase().endsWith('@gmail.com')) {
+                                    _showSnack("Only Gmail addresses are allowed");
+                                     return;
+                                  }
+
+                                  if (pass.length < 7) {
+                                     _showSnack("Password must be at least 7 characters");
+                                   return;
+                                  }
 
                                   if (pass != confirm) {
                                     _showSnack("Passwords do not match");
