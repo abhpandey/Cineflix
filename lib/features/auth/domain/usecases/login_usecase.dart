@@ -23,9 +23,9 @@ final loginUsecaseProvider = Provider<LoginUsecase>((ref){
 
 class LoginUsecase 
   implements UsecaseWithParams<AuthEntity, LoginUsecaseParams>{
-  final IauthRepository _authRepository;
+  final IAuthRepository _authRepository;
 
-  LoginUsecase({required IauthRepository authRepository})
+  LoginUsecase({required IAuthRepository authRepository})
     : _authRepository = authRepository;
   @override
   Future<Either<Failure, AuthEntity>> call(LoginUsecaseParams params) {
