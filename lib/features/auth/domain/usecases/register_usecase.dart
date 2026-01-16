@@ -31,9 +31,9 @@ final registerUsecaseProvider = Provider<RegisterUsecase>((ref){
 class RegisterUsecase 
     implements UsecaseWithParams<bool, RegisterUsecaseParams>{
 
-        final IauthRepository _iauthRepository;
+        final IAuthRepository _iauthRepository;
 
-        RegisterUsecase({required IauthRepository iauthRepository})
+        RegisterUsecase({required IAuthRepository iauthRepository})
         : _iauthRepository = iauthRepository;
 
       @override
