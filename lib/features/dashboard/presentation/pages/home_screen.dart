@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _pages = const [
     HomePageBody(),
     MoviesScreen(),
-    Profile(),
+    ProfileScreen(),
   ];
 
   @override
