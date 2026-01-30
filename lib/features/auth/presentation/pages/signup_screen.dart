@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'login_screen.dart';
 import '../view_model/auth_view_model.dart';
 import '../state/auth_state.dart';
@@ -21,10 +22,12 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
   void initState() {
     super.initState();
 
-    /// ✅ Side-effects must be registered ONCE
+    // ✅ Side-effects registered once
     ref.listenManual<AuthState>(
       authViewModelProvider,
       (prev, next) {
+        if (!mounted) return;
+
         if (next.status == AuthStatus.error && next.errorMessage != null) {
           _showSnack(next.errorMessage!);
         }
@@ -49,28 +52,22 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
     super.dispose();
   }
 
-  InputDecoration _decoration() {
+  // ✅ Same style as your NEW login page
+  InputDecoration _decoration(String hint, IconData icon) {
     return InputDecoration(
+      prefixIcon: Icon(icon, color: Colors.redAccent.shade700, size: 20),
+      hintText: hint,
+      hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
       filled: true,
       fillColor: Colors.white,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide.none,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(15),
+        borderSide: BorderSide(color: Colors.grey.shade200),
       ),
-    );
-  }
-
-  Widget _label(String text) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 6),
-      child: Text(
-        text,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 12,
-          letterSpacing: .5,
-        ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(15),
+        borderSide: const BorderSide(color: Colors.redAccent, width: 2),
       ),
     );
   }
@@ -78,158 +75,191 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
   void _showSnack(String message) {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
+      SnackBar(
+        content: Text(message),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        backgroundColor: Colors.redAccent,
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    /// ✅ Safe to watch inside build
     final authState = ref.watch(authViewModelProvider);
     final isLoading = authState.status == AuthStatus.loading;
 
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color(0xFFB30000),
-                  Color(0xFF7A0000),
-                  Color(0xFF2B0000),
+      body: Container(
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFFE53935), // Vibrant Red
+              Color(0xFFB71C1C), // Deep Red
+              Color(0xFF1A1A1A), // Dark contrast
+            ],
+          ),
+        ),
+        child: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Column(
+                children: [
+                  // ✅ Logo circle like login
+                  Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: const BoxDecoration(
+                      color: Colors.white24,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(Icons.person_add_alt_1,
+                        size: 60, color: Colors.white),
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  const Text(
+                    "Create Account",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.2,
+                    ),
+                  ),
+                  Text(
+                    "Sign up to start watching movies",
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.7),
+                      fontSize: 14,
+                    ),
+                  ),
+
+                  const SizedBox(height: 35),
+
+                  // ✅ Card like login
+                  Container(
+                    padding: const EdgeInsets.all(24),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(25),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          blurRadius: 20,
+                          offset: const Offset(0, 10),
+                        )
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        TextField(
+                          controller: _nameCtrl,
+                          decoration: _decoration("Full Name", Icons.person_outline),
+                        ),
+                        const SizedBox(height: 18),
+                        TextField(
+                          controller: _emailCtrl,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: _decoration("Email Address", Icons.email_outlined),
+                        ),
+                        const SizedBox(height: 18),
+                        TextField(
+                          controller: _passCtrl,
+                          obscureText: true,
+                          decoration: _decoration("Password", Icons.lock_outline),
+                        ),
+                        const SizedBox(height: 18),
+                        TextField(
+                          controller: _confirmCtrl,
+                          obscureText: true,
+                          decoration: _decoration("Confirm Password", Icons.lock_open_rounded),
+                        ),
+                        const SizedBox(height: 26),
+
+                        SizedBox(
+                          width: double.infinity,
+                          height: 55,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFFB71C1C),
+                              foregroundColor: Colors.white,
+                              elevation: 4,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            ),
+                            onPressed: isLoading ? null : _onSignupPressed,
+                            child: isLoading
+                                ? const SizedBox(
+                                    width: 24,
+                                    height: 24,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                      strokeWidth: 2,
+                                    ),
+                                  )
+                                : const Text(
+                                    "SIGN UP",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 28),
+
+                  // ✅ bottom link like login
+                  GestureDetector(
+                    onTap: isLoading
+                        ? null
+                        : () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (_) => const LoginScreen()),
+                            );
+                          },
+                    child: RichText(
+                      text: TextSpan(
+                        text: "Already have an account? ",
+                        style: const TextStyle(color: Colors.white70),
+                        children: [
+                          TextSpan(
+                            text: "Log In",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline,
+                              decorationColor: Colors.white.withOpacity(0.5),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 10),
                 ],
               ),
             ),
           ),
-          SafeArea(
-            child: Center(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 24),
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 430),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 60),
-                      const Center(
-                        child: Text(
-                          "Sign Up",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                            fontWeight: FontWeight.w700,
-                            letterSpacing: 1,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-
-                      _label("Name"),
-                      _textField(_nameCtrl),
-
-                      const SizedBox(height: 18),
-                      _label("Email"),
-                      _textField(_emailCtrl,
-                          keyboardType: TextInputType.emailAddress),
-
-                      const SizedBox(height: 18),
-                      _label("Create a Password"),
-                      _textField(_passCtrl, obscure: true),
-
-                      const SizedBox(height: 18),
-                      _label("Confirm Password"),
-                      _textField(_confirmCtrl, obscure: true),
-
-                      const SizedBox(height: 40),
-
-                      SizedBox(
-                        width: double.infinity,
-                        height: 46,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFFE10000),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          onPressed: isLoading ? null : _onSignupPressed,
-                          child: isLoading
-                              ? const SizedBox(
-                                  width: 22,
-                                  height: 22,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                    color: Colors.white,
-                                  ),
-                                )
-                              : const Text(
-                                  "Sign Up",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                        ),
-                      ),
-
-                      const SizedBox(height: 14),
-
-                      Center(
-                        child: GestureDetector(
-                          onTap: isLoading
-                              ? null
-                              : () {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) => const LoginScreen(),
-                                    ),
-                                  );
-                                },
-                          child: const Text(
-                            "Already have an account? Login here",
-                            style: TextStyle(
-                              color: Colors.blueAccent,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      const SizedBox(height: 120),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _textField(
-    TextEditingController controller, {
-    bool obscure = false,
-    TextInputType keyboardType = TextInputType.text,
-  }) {
-    return SizedBox(
-      height: 48,
-      child: TextField(
-        controller: controller,
-        obscureText: obscure,
-        keyboardType: keyboardType,
-        decoration: _decoration(),
+        ),
       ),
     );
   }
 
   void _onSignupPressed() async {
+    FocusScope.of(context).unfocus();
+
     final name = _nameCtrl.text.trim();
     final email = _emailCtrl.text.trim();
     final pass = _passCtrl.text;
