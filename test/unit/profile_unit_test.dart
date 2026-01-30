@@ -23,7 +23,6 @@ void main() {
 
     final controller = ProfileController(dio, session);
 
-    // Put controller into a non-default state
     controller.state = ProfileState(
       loading: true,
       imageUrl: 'https://example.com/img.png',
@@ -34,7 +33,6 @@ void main() {
 
     expect(controller.state.loading, false);
 
-    // Depending on your clear() implementation, imageUrl might become null or ''
     expect(controller.state.imageUrl, anyOf(isNull, ''));
 
     expect(controller.state.error, isNull);

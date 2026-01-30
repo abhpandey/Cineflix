@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// ✅ Your profile screen import
 import 'package:ceniflix/features/bottom_screens/presentation/page/profile.dart';
 
 import '../../../../helpers/fake_user_session_service.dart';
@@ -17,7 +16,6 @@ void main() {
   }) {
     final mockDio = MockDio();
 
-    // ✅ FIX: ProfileController needs (Dio, UserSessionService)
     final controller = ProfileController(mockDio, fakeSession);
 
     return ProviderScope(
@@ -25,7 +23,6 @@ void main() {
         // session provider override
         userSessionServiceProvider.overrideWithValue(fakeSession),
 
-        // ✅ override profileProvider with controller
         profileProvider.overrideWith((ref) => controller),
       ],
       child: const MaterialApp(home: ProfileScreen()),
@@ -36,7 +33,7 @@ void main() {
     final fakeSession = FakeUserSessionService();
 
     await tester.pumpWidget(wrapWithApp(fakeSession: fakeSession));
-    await tester.pump(); // initState microtask
+    await tester.pump(); 
 
     expect(find.text('Profile'), findsOneWidget);
     expect(find.text('Test User'), findsOneWidget);

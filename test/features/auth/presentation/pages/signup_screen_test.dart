@@ -28,7 +28,6 @@ void main() {
   testWidgets('Signup: non-gmail email shows snackbar', (tester) async {
     await tester.pumpWidget(wrapWithApp(const SignupScreen()));
 
-    // Fill fields
     await tester.enterText(find.byType(TextField).at(0), 'John Doe');
     await tester.enterText(find.byType(TextField).at(1), 'john@yahoo.com');
     await tester.enterText(find.byType(TextField).at(2), '1234567');

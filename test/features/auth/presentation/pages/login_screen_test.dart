@@ -11,7 +11,6 @@ void main() {
   Widget wrapWithApp(Widget child) {
     return ProviderScope(
       overrides: [
-        // ✅ NotifierProvider override: no ref parameter
         authViewModelProvider.overrideWith(() => FakeAuthViewModel()),
       ],
       child: MaterialApp(home: child),
@@ -23,7 +22,7 @@ void main() {
     await tester.pumpWidget(wrapWithApp(const LoginScreen()));
 
     await tester.tap(find.text('LOGIN'));
-    await tester.pump(); // show snackbar
+    await tester.pump(); 
 
     expect(find.text('Please enter credentials'), findsOneWidget);
   });
@@ -32,8 +31,7 @@ void main() {
     (tester) async {
   await tester.pumpWidget(wrapWithApp(const LoginScreen()));
 
-  // ✅ "Sign Up" is inside RichText (TextSpan), so find.text won't work.
-  // Tap the GestureDetector that wraps the RichText.
+
   final signUpLink = find.byWidgetPredicate(
     (w) => w is GestureDetector && w.child is RichText,
   );
