@@ -132,7 +132,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     ),
                   ),
                   Text(
-                    "Sign up to start watching movies",
+                    "Sign up to Book movies!!",
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.7),
                       fontSize: 14,
