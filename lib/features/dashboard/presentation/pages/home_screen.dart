@@ -12,11 +12,21 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
-  final List<Widget> _pages = const [
-    HomePageBody(),
-    MoviesScreen(),
-    ProfileScreen(),
-  ];
+  late final List<Widget> _pages;
+
+  @override
+  void initState() {
+    super.initState();
+    _pages = [
+      HomePageBody(onOpenMovies: () => _openTab(1)),
+      const MoviesScreen(),
+      const ProfileScreen(),
+    ];
+  }
+
+  void _openTab(int index) {
+    setState(() => _currentIndex = index);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
-        onTap: (index) => setState(() => _currentIndex = index),
+        onTap: _openTab,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.movie), label: 'Movies'),
@@ -58,7 +68,9 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class HomePageBody extends StatelessWidget {
-  const HomePageBody({super.key});
+  const HomePageBody({super.key, required this.onOpenMovies});
+
+  final VoidCallback onOpenMovies;
 
   Widget _searchBar() {
     return Container(
@@ -84,15 +96,22 @@ class HomePageBody extends StatelessWidget {
     );
   }
 
-  Widget _moviePoster(String assetPath) {
-    return Container(
-      width: 120,
-      margin: const EdgeInsets.only(right: 12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        image: DecorationImage(
-          image: AssetImage(assetPath),
-          fit: BoxFit.cover,
+  Widget _moviePoster(BuildContext context, String assetPath) {
+    return InkWell(
+      borderRadius: BorderRadius.circular(12),
+      onTap: onOpenMovies,
+      child: Card(
+        margin: const EdgeInsets.only(right: 12),
+        elevation: 5,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Image.asset(
+            assetPath,
+            width: 120,
+            height: 170,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );
@@ -102,45 +121,56 @@ class HomePageBody extends StatelessWidget {
     required String poster,
     required String title,
     required String subtitle,
+    required VoidCallback onTap,
   }) {
-    return SizedBox(
-      width: 110,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 140,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              image: DecorationImage(
-                image: AssetImage(poster),
-                fit: BoxFit.cover,
+    return InkWell(
+      borderRadius: BorderRadius.circular(12),
+      onTap: onTap,
+      child: SizedBox(
+        width: 110,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Card(
+              margin: EdgeInsets.zero,
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.asset(
+                  poster,
+                  height: 140,
+                  width: 110,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            title,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 12,
-              fontWeight: FontWeight.w700,
+            const SizedBox(height: 8),
+            Text(
+              title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+              ),
             ),
-          ),
-          const SizedBox(height: 2),
-          Text(
-            subtitle,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-              color: Colors.white70,
-              fontSize: 10,
-              fontWeight: FontWeight.w500,
+            const SizedBox(height: 2),
+            Text(
+              subtitle,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                color: Colors.white70,
+                fontSize: 10,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -209,7 +239,7 @@ class HomePageBody extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: posters.length,
               itemBuilder: (context, index) {
-                return _moviePoster(posters[index]);
+                return _moviePoster(context, posters[index]);
               },
             ),
           ),
@@ -229,7 +259,7 @@ class HomePageBody extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: onOpenMovies,
                 child: const Text(
                   "See All >",
                   style: TextStyle(
@@ -254,6 +284,7 @@ class HomePageBody extends StatelessWidget {
                   poster: m["poster"]!,
                   title: m["title"]!,
                   subtitle: m["subtitle"]!,
+                  onTap: onOpenMovies,
                 );
               },
             ),
@@ -273,7 +304,7 @@ class HomePageBody extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: onOpenMovies,
                 child: const Text(
                   "See All >",
                   style: TextStyle(
@@ -298,6 +329,7 @@ class HomePageBody extends StatelessWidget {
                   poster: m["poster"]!,
                   title: m["title"]!,
                   subtitle: m["subtitle"]!,
+                  onTap: onOpenMovies,
                 );
               },
             ),
